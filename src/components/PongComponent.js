@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 
-let autostop = 0;
-
-export default class ConnectFourComponent extends Component {
+export default class PongComponent extends Component {
   render() {
     return (
       <div width="100%" height="100%">
         <canvas
-          id="ConnectFourCanvas"
+          id="PongCanvas"
           onClick={(e) => this.handleClick(e)}
           onKeyDown={(e) => this.handleKeyDown(e)}
           onKeyUp={(e) => this.handleKeyUp(e)}
@@ -43,7 +41,7 @@ export default class ConnectFourComponent extends Component {
   }
 
   componentDidMount() {
-    const canvas = document.getElementById("ConnectFourCanvas");
+    const canvas = document.getElementById("PongCanvas");
     const ctx = canvas.getContext("2d");
 
     const width = (canvas.width = window.innerWidth);
@@ -192,8 +190,7 @@ export default class ConnectFourComponent extends Component {
   step(timestamp) {
     if (this.state.start === undefined) this.setState({ start: timestamp });
     const elapsed = timestamp - this.state.start;
-    autostop++;
-    if (autostop < 1000) window.requestAnimationFrame(this.step.bind(this));
+    window.requestAnimationFrame(this.step.bind(this));
 
     if (elapsed > 60) {
       this.calculate();
