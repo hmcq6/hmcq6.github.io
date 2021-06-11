@@ -1,0 +1,88 @@
+@import 'normalize.css';
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+body {
+  margin: 0px;
+  background-color: #27272c;
+}
+
+#logo {
+  margin-top: 1em;
+}
+
+.navigation {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-content: center;
+}
+
+.navigation {
+  margin-top: 5em;
+  padding-bottom: 2em;
+  border: 10px solid;
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  border-image-slice: 1;
+  border-image-source:
+    linear-gradient(
+      to right,
+      #34FAA8,
+      #FAA733,
+      #A733FA
+    );
+}
+
+.navigation button {
+  display:inline-block;
+  padding:0.35em 1.2em;
+  margin:0 0.3em 0.3em 0;
+  border-radius:0.12em;
+  box-sizing: border-box;
+  text-decoration:none;
+  /*font-family:Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif; */
+  font-family: Courier, monospace;
+  font-weight:300;
+  color:white;
+  text-align:center;
+  border-top: 0;
+  border-bottom: 0;
+  background-color: transparent;
+  border-width: 3px;
+  border-style: solid;
+  border-image: 
+    linear-gradient(
+    to bottom, 
+    #34FAA8,
+    #A733FA 
+  ) 1 100%;
+}
+
+.navigation button:hover {
+  border-top: 0;
+  border-bottom: 0;
+  color:#000000;
+  background-image: 
+    linear-gradient(
+    to bottom, 
+    #34FAA8,
+    #A733FA 
+  );
+}
+
+.navigation button:active {
+  filter: brightness(50%);
+}
+
+.navigation button:hover {
+}
+
+@media all and (max-width:30em) {
+  .navigation button {
+    display: block;
+    margin: 0.4em auto;
+  }
+}

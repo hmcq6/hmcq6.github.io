@@ -18,11 +18,13 @@ const Navigation = ({ defaultIndex, children }) => {
 
   return (
     <>
-      {buttons.map(({ index, label }) => (
-        <button onClick={() => changeItem(index)}>{label}</button>
-      ))}
+      <div className="navigation">
+        {buttons.map(({ index, label }) => (
+          <button onClick={() => changeItem(index)}>{label}</button>
+        ))}
+      </div>
 
-      {items.filter(({ props: { index } }) => index === selectedItem)}
+        {items.filter(({ props: { index } }) => index === selectedItem)}
     </>
   );
 };
