@@ -344,6 +344,7 @@ export default class GameOfLife extends Component {
     pixelsHigh = this.state.pixelsHigh,
     pixelsWide = this.state.pixelsWide
   ) {
+    window.cancelAnimationFrame(this.state.raf);
     const dataRow = Array(pixelsHigh).fill(false);
     const matrix = [...Array(pixelsWide)].map(() => Array.from(dataRow));
 
@@ -365,6 +366,11 @@ export default class GameOfLife extends Component {
     ctx.fillStyle = "#34FAA8";
 
     this.drawMatrix(ctx, matrix, width, height);
+    setTimeout(() => {
+      this.setState({
+        raf: window.requestAnimationFrame(this.step.bind(this))
+      });
+    }, 2000);
   }
 
   componentWillUnmount() {
@@ -425,17 +431,17 @@ export default class GameOfLife extends Component {
   step(timestamp) {
     if (this.state.start === undefined) this.setState({ start: timestamp });
     const elapsed = timestamp - this.state.start;
-    window.requestAnimationFrame(this.step.bind(this));
+    if (this.state.frame > this.state.resetAfterFrame) {
+      this.reset();
+      this.setState({ frame: 0 });
+    } else {
+      window.requestAnimationFrame(this.step.bind(this));
+    }
 
     if (elapsed > this.state.speed) {
       this.setState({ frame: this.state.frame + 1 });
       this.calculate();
       this.setState({ start: timestamp });
-    }
-
-    if (this.state.frame > this.state.resetAfterFrame) {
-      this.reset();
-      this.setState({ frame: 0 });
     }
   }
 
