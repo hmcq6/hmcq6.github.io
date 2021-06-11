@@ -8,7 +8,8 @@ import "../App.scss";
 const App = () => {
   return (
     <>
-      <ConwayCanvas id="logo" width={800} height={90} backgroundColor="#27272c" />
+      <ConwayCanvas id="logo" width={800} height={90} backgroundColor="#27272c" speed="240"
+      resetAfterFrame="20" />
 
       <Navigation defaultIndex="1">
         <PongComponent index="1" label="Pong" />

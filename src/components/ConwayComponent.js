@@ -275,12 +275,16 @@ export default class GameOfLife extends Component {
   }
 
   constructor(props) {
+    const { id, backgroundColor, height: canvasHeight, width: canvasWidth, resetAfterFrame, speed } = props
     super(props);
     this.state = {
-      id: props.id,
-      canvasHeight: props.height,
-      canvasWidth: props.width,
-      backgroundColor: props.backgroundColor || 'black'
+      id,
+      backgroundColor: backgroundColor || 'black',
+      canvasHeight,
+      canvasWidth,
+      frame: 0,
+      resetAfterFrame,
+      speed: speed || 60
     }
     this.c = React.createRef();
   }
@@ -331,6 +335,36 @@ export default class GameOfLife extends Component {
         raf: window.requestAnimationFrame(this.step.bind(this))
       });
     }, 2000);
+  }
+
+  reset(
+    ctx = this.state.ctx,
+    height = this.state.height,
+    width = this.state.width,
+    pixelsHigh = this.state.pixelsHigh,
+    pixelsWide = this.state.pixelsWide
+  ) {
+    const dataRow = Array(pixelsHigh).fill(false);
+    const matrix = [...Array(pixelsWide)].map(() => Array.from(dataRow));
+
+    const midHeight = Math.max(Math.floor((pixelsHigh - NameMask.length) / 2), 0);
+    const midWidth = Math.max(Math.floor((pixelsWide - NameMask[0].length) / 2), 0);
+
+    for (let j = 0; j < NameMask.length; j++) {
+      for (let i = 0; i < NameMask[0].length; i++) {
+        matrix[i + midWidth][j + midHeight] = NameMask[j][i];
+      }
+    }
+
+    this.setState({
+      matrix,
+    });
+
+    ctx.fillStyle = this.state.backgroundColor;
+    ctx.fillRect(0, 0, width, height);
+    ctx.fillStyle = "#34FAA8";
+
+    this.drawMatrix(ctx, matrix, width, height);
   }
 
   componentWillUnmount() {
@@ -393,9 +427,15 @@ export default class GameOfLife extends Component {
     const elapsed = timestamp - this.state.start;
     window.requestAnimationFrame(this.step.bind(this));
 
-    if (elapsed > 60) {
+    if (elapsed > this.state.speed) {
+      this.setState({ frame: this.state.frame + 1 });
       this.calculate();
       this.setState({ start: timestamp });
+    }
+
+    if (this.state.frame > this.state.resetAfterFrame) {
+      this.reset();
+      this.setState({ frame: 0 });
     }
   }
 
