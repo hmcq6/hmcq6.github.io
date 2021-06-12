@@ -3,16 +3,24 @@ import React, { Component } from "react";
 export default class PongComponent extends Component {
   render() {
     return (
-      <div width="100%" height="100%">
         <canvas
           id="PongCanvas"
           onClick={(e) => this.handleClick(e)}
           onKeyDown={(e) => this.handleKeyDown(e)}
           onKeyUp={(e) => this.handleKeyUp(e)}
+          height={this.state.canvasHeight}
+          width={this.state.canvasWidth}
           tabIndex="1"
         ></canvas>
-      </div>
     );
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      canvasWidth: props.width,
+      canvasHeight: props.height
+    };
   }
 
   handleKeyDown({ keyCode }) {
@@ -44,8 +52,12 @@ export default class PongComponent extends Component {
     const canvas = document.getElementById("PongCanvas");
     const ctx = canvas.getContext("2d");
 
-    const width = (canvas.width = window.innerWidth);
-    const height = (canvas.height = window.innerHeight);
+    //const width = (canvas.width = window.innerWidth);
+    //const height = (canvas.height = window.innerHeight);
+    if (!this.state.canvasWidth) canvas.width = canvas.parentElement.clientWidth;
+    if (!this.state.canvasHeight) canvas.height = canvas.parentElement.clientHeight;
+    const width = canvas.width;
+    const height = canvas.height;
 
     const ballX = Math.floor(Math.random() * (width / 2) + width / 4);
     const ballY = Math.floor(Math.random() * (height / 2) + height / 4);
@@ -159,10 +171,10 @@ export default class PongComponent extends Component {
     width = this.state.width
   ) {
     ctx.fillStyle = "white";
-    ctx.font = "30px Arial";
-    ctx.fillText(`Player 1: ${player1Score}`, width / 2 + 40, 50);
+    ctx.font = "26 Arial";
+    ctx.fillText(`Player 1: ${player1Score}`, width / 2 + 40, 20);
     ctx.fillStyle = "red";
-    ctx.fillText(`Player 2: ${player2Score}`, width / 2 + 200, 50);
+    ctx.fillText(`Player 2: ${player2Score}`, width / 2 + 100, 20);
     ctx.fillStyle = "black";
   }
 

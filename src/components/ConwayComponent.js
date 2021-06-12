@@ -291,8 +291,8 @@ export default class GameOfLife extends Component {
 
   componentDidMount() {
     const canvas = this.c.current;
-    if (!this.state.canvasWidth) canvas.width = canvas.parentElement.offsetWidth;
-    if (!this.state.canvasHeight) canvas.height = canvas.parentElement.offsetHeight;
+    if (!this.state.canvasWidth) canvas.width = canvas.parentElement.clientWidth;
+    if (!this.state.canvasHeight) canvas.height = canvas.parentElement.clientHeight;
     //canvas.width = this.state.canvasWidth
     //canvas.height = this.state.canvasHeight
     const ctx = canvas.getContext("2d");

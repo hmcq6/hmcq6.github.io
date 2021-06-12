@@ -1,4 +1,10 @@
 @import 'normalize.css';
+
+$background-color: #27272c;
+$green: #A733FA;
+$purple: #A733FA;
+
+
 .App {
   font-family: sans-serif;
   text-align: center;
@@ -6,12 +12,136 @@
 
 body {
   margin: 0px;
-  background-color: #27272c;
+  background-color: $background-color;
 }
 
 #logo {
   margin-top: 1em;
 }
+
+.page {
+  display: grid;
+  margin-left: 10%;
+  margin-right: 10%;
+  justify-content: center;
+
+  grid-template-columns: 10% 80% 10%;
+}
+
+#profile {
+  display: grid;
+  border-radius: 50%;
+  border: 10px solid white;
+}
+
+#bio {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  justify-items: center;
+  align-items: center;
+}
+
+#PongCanvas {
+  position: absolute;
+  -webkit-animation: slide-left 1s forwards;
+  -webkit-animation-delay: 1s;
+  animation: slide-left 1s forwards;
+  animation-delay: 1s;
+  transform: translateX(3000%);
+  border: 5px solid white;
+}
+
+#PongCanvas:after {
+  content: "";
+  display: block;
+  position: fixed; /* could also be absolute */ 
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  background-color: rgba(0,0,0,0.2);
+}
+
+#arrow {
+  position: absolute;
+  top: 300px;
+  left: 600px;
+  animation: bounce;
+  animation-duration: 2s;
+  animation-timing-function: cubic-bezier(0.280, 0.840, 0.420, 1);
+}
+
+@keyframes bounce {
+  0% { transform: rotate(-180deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@-webkit-keyframes slide-left {
+      0% { transform: translateX(3000px); }
+      100% { transform: translateX(100%); }
+}
+
+@keyframes slide-left {
+      0% { transform: translateX(3000px); }
+      100% { transform: translateX(100%); }
+}
+
+h1 {
+  font-size: 72pt;
+  color: #00F9A3;
+  font-family: 'Baloo 2';
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+h2 {
+  font-size: 36pt;
+  color: $purple;
+  font-family: 'Montserrat', sans-serif;
+}
+
+h3 {
+  font-size: 18pt;
+}
+
+h3, h4, h5, h6, p {
+  color: #8F9E98;
+  font-family: 'Montserrat', sans-serif;
+}
+h4, h5, h6, p {
+  font-size: 14pt;
+}
+
+.card {
+  background-color: darken($background-color, 10%);
+  border: 1px solid #656568;
+  grid-column-start: 2;
+  padding: 1em;
+  margin-top: 2em;
+}
+
+.card h1 {
+  filter: opacity(100%);
+}
+
+hr {
+  height: 10px;
+  background:
+    linear-gradient(
+      to right,
+      #34FAA8,
+      #FAA733,
+      $green
+    );
+  border: 0;
+}
+
+
+
+
+
+
 
 .navigation {
   display: grid;
@@ -20,20 +150,45 @@ body {
 }
 
 .navigation {
-  margin-top: 5em;
-  padding-bottom: 2em;
-  border: 10px solid;
-  border-top: 0;
-  border-right: 0;
-  border-left: 0;
-  border-image-slice: 1;
-  border-image-source:
+}
+
+
+.card {
+  background-color: darken($background-color, 10%);
+  border: 1px solid #656568;
+  grid-column-start: 2;
+  padding: 1em;
+}
+
+.card h1 {
+  filter: opacity(100%);
+}
+
+hr {
+  height: 10px;
+  background:
     linear-gradient(
       to right,
       #34FAA8,
       #FAA733,
-      #A733FA
+      $green
     );
+  border: 0;
+}
+
+
+
+
+
+
+
+.navigation {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-content: center;
+}
+
+.navigation {
 }
 
 .navigation button {

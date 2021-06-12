@@ -24,7 +24,9 @@ const Navigation = ({ defaultIndex, children }) => {
         ))}
       </div>
 
-        {items.filter(({ props: { index } }) => index === selectedItem)}
+      <div class="page">
+        {items.find(({ props: { index } }) => index === selectedItem)}
+      </div>
     </>
   );
 };
