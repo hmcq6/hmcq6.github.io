@@ -1,9 +1,9 @@
 @import 'normalize.css';
 
 $background-color: #27272c;
-$green: #A733FA;
+$green: #34FAA8;
 $purple: #A733FA;
-
+$grey: #656568;
 
 .App {
   font-family: sans-serif;
@@ -13,6 +13,11 @@ $purple: #A733FA;
 body {
   margin: 0px;
   background-color: $background-color;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.text-center {
+  text-align: center;
 }
 
 #logo {
@@ -28,6 +33,82 @@ body {
   grid-template-columns: 10% 80% 10%;
 }
 
+.page-body {
+  grid-column-start: 2;
+}
+
+.experience-row {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  border-top: 1px solid $grey;
+  margin-top: 2em;
+}
+
+.company-info h3 {
+  color: $green;
+}
+
+.company-info label {
+  color: $grey;
+}
+
+.experience-row ul {
+  border-left: 1px solid $grey;
+  color: lighten($grey, 20%);
+}
+
+.skills {
+  text-align: center;
+  /* background-color: white; */
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: auto auto;
+
+  /*background:
+    linear-gradient(
+      to bottom,
+      $background-color,
+      #FFFFFF
+    );*/
+}
+
+.skills h2 {
+  grid-column-start: 2 span;
+}
+
+.skills ul {
+  list-style-type: none;
+}
+
+.skills li {
+  font-size: 1em;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  margin-top: 0.5em;
+  justify-items: center;
+}
+
+.skills li label {
+  width: 7em;
+  height: 1em;
+  position: relative;
+  background: $green;
+  display: grid;
+  align-items: center;
+}
+
+.skills li label:before {
+  content: "";
+  position: absolute;
+  right: -0.5em;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-left: 0.5em solid $green;
+  border-top: 0.5em solid transparent;
+  border-bottom: 0.5em solid transparent;
+}
+
 #profile {
   display: grid;
   border-radius: 50%;
@@ -36,55 +117,68 @@ body {
 
 #bio {
   display: grid;
-  grid-template-columns: 30% 70%;
+  grid-template-columns: 280px auto;
   justify-items: center;
   align-items: center;
 }
 
-#PongCanvas {
+.pongWrapper {
   position: absolute;
   -webkit-animation: slide-left 1s forwards;
   -webkit-animation-delay: 1s;
   animation: slide-left 1s forwards;
   animation-delay: 1s;
-  transform: translateX(3000%);
+  transform: translateX(25em);
+  align-items: center;
+}
+
+.pongWrapper:before {
+  content: "";
+  position: inherit;
+  top: 117.5px;
+  left: -80px;
+  width: 71px;
+  height: 75px;
+  background-image: url(./images/Arrow.svg);
+
+  animation: bounce;
+  animation-duration: 2s;
+  animation-delay: 2s;
+  animation-timing-function: ease;//cubic-bezier(0.280, 0.840, 0.420, 1);
+}
+
+.pongWrapper canvas {
   border: 5px solid white;
 }
 
-#PongCanvas:after {
-  content: "";
-  display: block;
-  position: fixed; /* could also be absolute */ 
+#PongWrapper:after {
+  /* works for pongCanvas */
+  content: "Click to Play";
+  color: white;
+  position: inherit; /* could also be absolute */ 
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
-  z-index: 10;
-  background-color: rgba(0,0,0,0.2);
-}
-
-#arrow {
-  position: absolute;
-  top: 300px;
-  left: 600px;
-  animation: bounce;
-  animation-duration: 2s;
-  animation-timing-function: cubic-bezier(0.280, 0.840, 0.420, 1);
+  background-color: rgba(0,0,0,0.5);
+  pointer-events: none;
 }
 
 @keyframes bounce {
   0% { transform: rotate(-180deg); }
+  33% { transform: rotate(180deg); }
+  66% { transform: rotate(-45deg); }
   100% { transform: rotate(0deg); }
 }
 
 @-webkit-keyframes slide-left {
       0% { transform: translateX(3000px); }
-      100% { transform: translateX(100%); }
+      100% { transform: translateX(25em); }
 }
 
 @keyframes slide-left {
       0% { transform: translateX(3000px); }
-      100% { transform: translateX(100%); }
+      100% { transform: translateX(25em); }
 }
 
 h1 {
@@ -115,49 +209,10 @@ h4, h5, h6, p {
 
 .card {
   background-color: darken($background-color, 10%);
-  border: 1px solid #656568;
+  border: 1px solid $grey;
   grid-column-start: 2;
-  padding: 1em;
+  padding: 2em;
   margin-top: 2em;
-}
-
-.card h1 {
-  filter: opacity(100%);
-}
-
-hr {
-  height: 10px;
-  background:
-    linear-gradient(
-      to right,
-      #34FAA8,
-      #FAA733,
-      $green
-    );
-  border: 0;
-}
-
-
-
-
-
-
-
-.navigation {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  justify-content: center;
-}
-
-.navigation {
-}
-
-
-.card {
-  background-color: darken($background-color, 10%);
-  border: 1px solid #656568;
-  grid-column-start: 2;
-  padding: 1em;
 }
 
 .card h1 {
